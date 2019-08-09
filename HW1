@@ -1,0 +1,13 @@
+file="D:\Book2.txt"
+import re
+
+try:
+    f = open (file, "r")
+except FileNotFoundError:
+    print("File not found")
+
+f = f.read().lower()
+f=re.sub('[\W]+',',',f)
+words=f.split(',')
+for i in words:
+    print(i,words.count(i))
