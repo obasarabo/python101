@@ -16,8 +16,5 @@ clear=clear.split()
 
 list=dict()
 for w in clear:
-    if w not in list:
-        list[w]=1
-    else:
-        list[w]=list[w]+1
+    list[w]=list.get(w,0)+1
 print(sorted(list.items()))
