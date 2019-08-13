@@ -1,0 +1,18 @@
+# f=open('D:\hangman_short.txt')
+# length=input('Enter a word''s length: ')
+# length=int(length)
+# word='_ '*length
+# print(word)
+# letter=input('Give me any letter, please: ')
+#
+#
+# print(word.find('_ '))
+# for word in f:
+#     if len(word.strip())==length:
+#         print(word)
+
+
+#
+# for word in f:
+#     print(word.strip())
+#     print(len(word.strip()))
