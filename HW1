@@ -1,13 +1,23 @@
-file="D:\Book2.txt"
-import re
-
+file='D:\Book.txt'
 try:
-    f = open (file, "r")
-except FileNotFoundError:
+    f=open(file)
+except:
     print("File not found")
 
-f = f.read().lower()
-f=re.sub('[\W]+',',',f)
-words=f.split(',')
-for i in words:
-    print(i,words.count(i))
+punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+text=""
+clear=""
+for i in f:
+    text=text+i
+for word in text:
+    if word not in punctuations:
+        clear=clear+word.lower()
+clear=clear.split()
+
+list=dict()
+for w in clear:
+    if w not in list:
+        list[w]=1
+    else:
+        list[w]=list[w]+1
+print(sorted(list.items()))
