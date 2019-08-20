@@ -1,0 +1,90 @@
+# This function creates a gameboard
+def game(lst):
+    print ("-------------")
+    for i in range(3):
+        print( "|", lst[0+i*3], "|", lst[1+i*3], "|", lst[2+i*3], "|")
+    print ("-------------")
+    
+#This function validates if input is a number and in range from 1 to 9 including 
+def validation(input_line):
+    i=range(1,10)
+    try:
+        input_line=int(input_line)
+        if input_line not in i:
+            print('Please enter a number in range from 1 to 9')
+        else: return input_line
+    except:
+        print('Sure this is a number? Try again ')
+
+# This function defines where Player 1 puts 'X' and redraws gameboard
+def player_one():
+    next_turn = False
+    while next_turn == False:
+        one_input='X'
+        one_position=input('Player 1, please select position where to put X: ')
+        one_position=validation(one_position)
+        # if input didn't pass validation we go back
+        if one_position is None:
+            game(new_lst)
+            continue
+        # We check if number is on board or it was used already
+        elif one_position in new_lst:
+            new_lst[one_position-1]=one_input
+            next_turn = True
+        else:print('This field is already occupied, please select another one')
+        # Redraw board
+        game(new_lst)
+
+# Same functionality as for Player 1
+def player_two():
+    next_turn=False
+    while next_turn==False:
+        two_input='O' 
+        two_position=input('Player 2, please select position where to put O: ')
+        two_position=validation(two_position)
+        if two_position is None:
+            game(new_lst)
+            continue
+        elif two_position not in new_lst:
+            print('This field is already occupied, please select another one')
+        else:
+            new_lst[two_position-1]=two_input
+            next_turn=True
+        game(new_lst)
+
+# Function to check if winning situation happened 
+def winner(player,board):
+    return((board[0]==player and board[1]==player and board[2]==player) or
+    (board[3]==player and board[4]==player and board[5]==player) or
+    (board[6] == player and board[7] == player and board[8] == player) or
+    (board[0] == player and board[3] == player and board[6] == player) or
+    (board[1] == player and board[4] == player and board[7] == player) or
+    (board[2] == player and board[5] == player and board[8] == player) or
+    (board[0] == player and board[4] == player and board[8] == player) or
+    (board[2] == player and board[4] == player and board[6] == player))
+
+# Initial board creating:
+lst=range(1,10)
+game(lst)
+new_lst=list()
+for i in lst:
+    new_lst.append(i)
+
+# Now game starts
+one_input='X'
+two_input='O'
+i=0
+while True:
+    player_one()
+    if winner(one_input,new_lst):
+        print('Player One won')
+        break
+    i += 1
+    if i==9:
+        print('This is Draw')
+        break
+    player_two()
+    if winner(two_input,new_lst):
+        print('Player Two won')
+        break
+    i+=1
