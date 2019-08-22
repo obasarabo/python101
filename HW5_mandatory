@@ -1,0 +1,17 @@
+import os.path
+# The loop continues until user enters valid path
+while True:
+    folder=input('Please enter a path:\n')
+    # Here I check if user didn't forget to put '\' at the end of folder name
+    if folder[-1]!='\\':
+        folder+='\\'
+    # Checking if folder exists
+    if os.path.isdir(folder) is False:
+        print("Such directory doesn't exist")
+    else:break
+file=input('Please enter a filename:\n')
+# Checking if file exists
+full_path=folder+file
+if os.path.isfile(full_path) is False:
+    print("File '%s' doesn't exist"%file)
+else:print(full_path)
