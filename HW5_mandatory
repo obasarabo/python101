@@ -1,17 +1,26 @@
+import argparse
 import os.path
-# The loop continues until user enters valid path
-while True:
-    folder=input('Please enter a path:\n')
-    # Here I check if user didn't forget to put '\' at the end of folder name
-    if folder[-1]!='\\':
-        folder+='\\'
-    # Checking if folder exists
-    if os.path.isdir(folder) is False:
-        print("Such directory doesn't exist")
-    else:break
-file=input('Please enter a filename:\n')
-# Checking if file exists
-full_path=folder+file
-if os.path.isfile(full_path) is False:
-    print("File '%s' doesn't exist"%file)
-else:print(full_path)
+
+#Arguments parsing
+parser = argparse.ArgumentParser(description='Validating if folder and file exists')
+parser.add_argument('Folder_path',help='Input path we are validating')
+parser.add_argument('-file_name',help='Input file name we are validating')
+args=parser.parse_args()
+
+#Function that checks if folder and file exists
+def dir_file(folder,file):
+    while True:
+        if os.path.isdir(folder) is False:
+            print("Such directory doesn't exist")
+        else:print(folder)
+        if file is None or len(file)==0:
+            break
+        else:
+            full_path=folder+file
+            if os.path.isfile(full_path) is False:
+                print("File '%s' doesn't exist"%file)
+            else:print(full_path)
+            break
+            
+#Calling function with parsed arguments
+dir_file(args.Folder_path,args.file_name)
