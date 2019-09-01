@@ -1,0 +1,40 @@
+import argparse
+import os.path
+import time
+#Arguments parsing
+parser = argparse.ArgumentParser(description='Validating if folder and file exists')
+parser.add_argument('Folder_path',help='Input path we are validating')
+parser.add_argument('-file_name',help='Input file name we are validating')
+args=parser.parse_args()
+
+#Function that checks if folder and file exists
+def dir_file(folder,file):
+    while True:
+        if os.path.isdir(folder) is False:
+
+            #Check if drive exists
+            drive=os.path.splitdrive(folder)
+            if os.path.isdir(drive[0]) is False:
+                print("Drive %s does not exist"%drive[0])
+            #Creating folders
+            else:
+                os.makedirs(folder,exist_ok=True)
+                print("Folder path %s was created"%folder)
+        else:
+            for name in os.listdir(folder):
+                if os.path.isfile(os.path.join(folder,name)):
+                    # print(name)
+                    print(name,
+                          time.ctime(os.path.getmtime(os.path.join(folder,name))),
+                          "Size:",os.path.getsize(os.path.join(folder,name)))
+
+        if file is None or len(file)==0:
+            break
+        else:
+            full_path=folder+file
+            if os.path.isfile(full_path) is False:
+                print("File '%s' doesn't exist"%file)
+            else:print(full_path)
+            break
+#Calling function with parsed arguments
+dir_file(args.Folder_path,args.file_name)
