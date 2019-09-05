@@ -1,0 +1,29 @@
+import argparse
+import os.path
+import csv
+import re
+#Arguments parsing
+parser = argparse.ArgumentParser(description='csv file parser')
+parser.add_argument('-path_csv',help='Path to *.csv file to be parsed')
+parser.add_argument('-col_name',help='Column to be displayed')
+args=parser.parse_args()
+
+#Function that checks if folder and file exists
+def file_validation(file,col_name):
+    if os.path.isfile(file) is False:
+        print("File '%s' doesn't exist"%file)
+    elif (os.path.splitext(file)[-1])!='.csv':
+        print('Sorry man, this is not a csv file')
+    else:
+        return(file,col_name)
+
+# Starting program
+path=(file_validation(args.path_csv, args.col_name))
+if path is not None:
+    with open(path[0],encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        column=path[1].replace('_',' ')
+        try:
+            for row in reader:
+                print(row[column])
+        except: print('Column "%s" does not exist'%path[1])
