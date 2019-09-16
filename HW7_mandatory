@@ -1,0 +1,35 @@
+import argparse
+import csv
+import json
+import os
+#Arguments parsing
+parser = argparse.ArgumentParser(description='csv to json file converter')
+parser.add_argument('-csv',help='Path to csv file to be parsed')
+parser.add_argument('-json',help='Path to json file to be parsed')
+args=parser.parse_args()
+
+# Validating csv file
+def csv_validation(csv_file):
+    if os.path.isfile(csv_file) is False:
+        print("File '%s' doesn't exist"%csv_file)
+    elif (os.path.splitext(csv_file)[-1])!='.csv':
+        print('Sorry man, "%s" is not a csv file'%csv_file)
+    else:
+        return(csv_file)
+# Validating if user entered *.json filename
+def json_validation(json_file):
+    if (os.path.splitext(json_file)[-1])!='.json':
+        print('Sorry man, "%s" is not a json file'%json_file)
+    else:
+        return(csv_file)
+
+# Converting csv to json
+csv_file=csv_validation(args.csv)
+json_file=json_validation(args.json)
+if csv_file is not None and json_file is not None:
+    with open(args.csv) as csv_file:
+        reader=csv.DictReader(csv_file)
+        with open(args.json, 'w') as f:
+            for i in reader:
+                del i['password']
+                json.dump(i,f)
