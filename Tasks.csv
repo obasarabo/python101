@@ -1,0 +1,12 @@
+ID,Priority,Details,Status,Deadline,Completed,Project
+1001,1,Complete HW 1,done,11/9/2019,14/9/2019,Project1
+1002,1,Review HW 1,new,13/9/2019,,Project1
+1003,2,Improve HW1,canceled,14/9/2019,,Project1
+1004,3,Add comments to HW1,pending,14/9/2019,,Project1
+1005,1,Complete HW 2,done,20/9/2019,18/9/2019,Project2
+1006,4,Format code in HW2,pending,20/9/2019,,Project2
+1007,3,Review HW 2,canceled,21/9/2019,,Project2
+1008,2,Learn regexps,done,25/9/2019,30/9/2019,Project2
+1009,1,Complete HW3,done,27/9/2019,30/9/2019,Project3
+1010,1,Complete HW4,pending,2/10/2019,,Project3
+1011,2,Refactor HW3,canceled,28/9/2019,,Project3
